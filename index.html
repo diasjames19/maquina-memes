@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <title>MAQUINA DE MEMES</title>
+</head>
+<body>
+    <div class="container">
+        <div class="app" id="downlabled">
+            <div class="logo">
+                <img  src="imagens/logo.png" alt="logo DIO">
+            </div>
+            <div class="app-image">
+                    <textarea name="" 
+                    class="text-box"
+                     placeholder="Digite seu meme"
+                       aria-multiline="true"></textarea>
+                    <div id="display-image">
+
+                    </div>
+                    <textarea name=""  
+                    class="text-box"
+                     placeholder="Digite seu meme"
+                       aria-multiline="true"></textarea>        
+                </div>
+            <div class="app-phto-picker">
+                <select id="meme-list"
+                onchange="trocarImagem(this.value)">
+                    <option value="1">Padrão</option>
+                </select>
+                <input 
+                type="file"
+                id="image-input"
+                accept="image/jpeg, image/png, image/jpg, image/wepbp">
+            </div>
+            <div class="botao">
+                <button id="btn-down" >DOWNLOAD</button>
+            </div>
+        </div>
+    </div>
+    <script src="./js/main.js"></script>
+    <script src="./js/html2canvas.js"></script>
+    <script>
+       document.getElementById("btn-down").onclick = ()=>{
+           const salvarTela = document.querySelector("#downlabled")
+           html2canvas(salvarTela).then((canvas) => {
+               const base64Image = canvas.toDataURL("image/png")
+               let gerarLink = document.createElement("a")
+               gerarLink.setAttribute("href",base64Image)
+               gerarLink.setAttribute("download", "meu-meme.png")
+               gerarLink.click()
+               gerarLink.remove()
+               
+           }).catch((err) => {
+               
+           })
+       }    
+    </script>
+</body>
+</html>
